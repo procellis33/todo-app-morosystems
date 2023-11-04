@@ -1,6 +1,8 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import Router from "./Router";
+import store from "./redux/store";
+import { Provider } from "react-redux";
 import "./assets/scss/main.scss";
 
 const rootEl = document.querySelector("#root");
@@ -9,7 +11,9 @@ if (rootEl === null) {
 }
 const root = createRoot(rootEl);
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
+  <Provider store={store}>
     <Router />
-  </React.StrictMode>,
+  </Provider>,
+  // </React.StrictMode>,
 );
