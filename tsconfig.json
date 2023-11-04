@@ -1,0 +1,52 @@
+{
+  "compilerOptions": {
+    // General Compilation Options
+    "useDefineForClassFields": true, // Use ECMAScript 3-compatible method for class fields
+
+    // Targeting Specific ECMAScript Version
+    "target": "ES2020", // Target ECMAScript 2020
+
+    // Library Declarations
+    "lib": ["ES2020", "DOM", "DOM.Iterable"], // Included libraries for compilation
+
+    // Module Resolution Strategy
+    "module": "ESNext", // Use ECMAScript modules
+
+    // Type Checking
+    "skipLibCheck": true, // Skip type checking of declaration files from external libraries
+
+    // Enables importing JSON files as modules
+    "resolveJsonModule": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler", // Use bundler for module resolution
+
+    // Error Reporting
+    "allowUnreachableCode": false, // Report unreachable code
+    "exactOptionalPropertyTypes": true, // Enable strict checking of optional property types
+    "noFallthroughCasesInSwitch": true, // Report fallthrough cases in switch statements
+    "noImplicitThis": true, // Enable strict checking of 'this' expressions
+    "noUnusedLocals": true, // Report unused local variables
+    "noUnusedParameters": true, // Report unused parameters
+    "noImplicitAny": true, // Enable strict checking for 'any' types
+    "noImplicitReturns": true, // Enable strict checking for return statements
+    "alwaysStrict": true, // Parse in strict mode and emit 'use strict'
+    "strictBindCallApply": true, // Enable strict bind, call, and apply methods
+    "strictFunctionTypes": true, // Enable strict checking for function types
+    "strictNullChecks": true, // Enable strict null checks
+    "strictPropertyInitialization": true, // Enable strict checking for property initialization
+
+    // JSX
+    "jsx": "react", // Specify JSX factory function (for React)
+
+    // Interoperability
+    "esModuleInterop": true, // Enable CommonJS/ES module interop
+    "allowJs": true, // Allow JavaScript files to be included
+    "checkJs": true, // Enable type checking for JavaScript files
+
+    // Isolated Modules
+    "isolatedModules": true // Treat each file as a separate module
+  },
+  "include": ["src/**/**/*"],
+  "exclude": ["node_modules"]
+}
