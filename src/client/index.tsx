@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './App';
+import Router from './Router';
 
 const rootEl = document.querySelector('#root');
 if (rootEl === null) {
@@ -9,6 +9,6 @@ if (rootEl === null) {
 const root = createRoot(rootEl);
 root.render(
   <React.StrictMode>
-    <App />
+    <Router />
   </React.StrictMode>,
 );
