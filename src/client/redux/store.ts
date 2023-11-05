@@ -2,8 +2,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
 import { all, type AllEffect, type Effect } from "redux-saga/effects";
 import rootReducer from "./rootReducer";
-import getTasksSaga from "./saga/getTasksSaga";
-import getCompletedTasks from "./saga/getCompletedTaskSaga";
+import getTasksSaga from "./sagas/getTasksSaga";
+import getCompletedTask from "./sagas/getCompletedTaskSaga";
+import createTaskSaga from "./sagas/createTaskSaga";
+import deleteTaskSaga from "./sagas/deleteTaskSaga";
+import modifyTaskSaga from "./sagas/modifyTaskSaga";
+import toggleTaskStatusSaga from "./sagas/toggleTaskStatusSaga";
 
 const saga = createSagaMiddleware();
 function* rootSaga(): Generator<
@@ -11,7 +15,14 @@ function* rootSaga(): Generator<
   void,
   unknown
 > {
-  yield all([getTasksSaga(), getCompletedTasks()]);
+  yield all([
+    getTasksSaga(),
+    getCompletedTask(),
+    createTaskSaga(),
+    deleteTaskSaga(),
+    modifyTaskSaga(),
+    toggleTaskStatusSaga(),
+  ]);
 }
 
 const store = configureStore({

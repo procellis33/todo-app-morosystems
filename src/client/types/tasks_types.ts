@@ -1,4 +1,4 @@
-export interface TaskList {
+export interface TTask {
   id: string;
   text: string;
   completed: boolean;
@@ -6,4 +6,18 @@ export interface TaskList {
   completedDate?: number;
 }
 
-export type TaskError = string;
+export type TTaskError = string;
+
+export type TCreateTask = string;
+
+export type TDeleteTask = string;
+
+export interface TModifyTask {
+  text: string;
+  id: string;
+}
+
+export interface TToggleTaskStatus {
+  completed: boolean;
+  id: string;
+}
