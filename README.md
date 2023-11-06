@@ -13,8 +13,8 @@ comprehensive showcase of capabilities.
 To run the application on your local machine, follow these steps:
 
 - Clone this repository.
-- Install dependencies by running npm install.
-- Start the development server with npm run dev.
+- Install dependencies by running `npm install`.
+- Start the development server with `npm run dev`.
 
 ## Documentation
 
