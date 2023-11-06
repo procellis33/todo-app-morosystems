@@ -1,15 +1,11 @@
 import styled from "styled-components";
-import { type TAllCompleted } from "../../types/task_component_types";
+import { type IAllCompleted } from "../../interfaces-types/task";
 
 export const StyledEmptySign = styled.h1`
   display: flex;
   height: 100%;
   align-items: center;
-
-  @media screen and (max-width: 900px) {
-    margin-left: 0;
-    font-size: 30px;
-  }
+  font-size: 30px;
 
   @media screen and (max-width: 550px) {
     margin-left: 0;
@@ -58,7 +54,7 @@ export const StyledHeader = styled.h2`
 
 export const StyledIcon = styled.div.withConfig({
   shouldForwardProp: (prop) => !["allCompleted"].includes(prop),
-})<TAllCompleted>`
+})<IAllCompleted>`
   opacity: ${({ allCompleted }) => (allCompleted ? 1 : 0.6)};
 `;
 

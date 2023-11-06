@@ -17,7 +17,6 @@ export const ErrorAlert = styled.div`
 `;
 
 export const ErrorAlertButton = styled.div`
-  //background-color: green;
   align-self: end;
 `;
 

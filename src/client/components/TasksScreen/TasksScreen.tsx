@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Task from "./Task/Task";
-import { type TTask } from "../../types/tasks_types";
+import { type ITask } from "../../interfaces-types/tasks";
 import {
   StyledEmptySign,
   StyledHeader,
@@ -11,19 +11,16 @@ import {
 } from "./TasksScreen.style";
 import { IoCreateOutline } from "react-icons/io5";
 import { useAppDispatch } from "../../redux/hooks";
-import {
-  createTaskFetch,
-  toggleTaskStatusFetch,
-} from "../../redux/reducers/tasksSlice";
+import { createTask, toggleTaskStatus } from "../../redux/reducers/tasksSlice";
 import { IoIosArrowDropdown } from "react-icons/io";
 
-interface TasksScreenProps {
+interface IAsksScreenProps {
   allTasksCount: number;
-  filteredTasks: TTask[];
-  tasksAll: TTask[];
+  filteredTasks: ITask[];
+  tasksAll: ITask[];
 }
 
-const TasksScreen: React.FC<TasksScreenProps> = ({
+const TasksScreen: React.FC<IAsksScreenProps> = ({
   allTasksCount,
   filteredTasks,
   tasksAll,
@@ -34,7 +31,7 @@ const TasksScreen: React.FC<TasksScreenProps> = ({
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): void => {
     if (e.key === "Enter") {
       textInputRef.current?.blur();
-      createTask();
+      createTaskClicked();
     }
   };
   const [allCompleted, setAllCompleted] = useState(false);
@@ -43,10 +40,10 @@ const TasksScreen: React.FC<TasksScreenProps> = ({
       !tasksAll.some((task) => !task.completed) && tasksAll.length !== 0,
     );
   }, [tasksAll]);
-  const createTask = (): void => {
+  const createTaskClicked = (): void => {
     if (textInputRef?.current !== undefined && textInputRef.current !== null) {
       const text = textInputRef.current.value;
-      if (text !== "" && text !== undefined) dispatch(createTaskFetch(text));
+      if (text !== "" && text !== undefined) dispatch(createTask(text));
       textInputRef.current.value = "";
     }
   };
@@ -55,7 +52,7 @@ const TasksScreen: React.FC<TasksScreenProps> = ({
     <StyledTasksScreen>
       <StyledHeader>todos</StyledHeader>
       <StyledWrapper>
-        <div onClick={createTask}>
+        <div onClick={createTaskClicked}>
           <IoCreateOutline size={40} color={"#5d5d5d"} />
         </div>
         <StyledTextInput
@@ -71,13 +68,9 @@ const TasksScreen: React.FC<TasksScreenProps> = ({
             const allCompleted = !tasksAll.some((task) => !task.completed);
             tasksAll.forEach((task) => {
               if (allCompleted && task.completed) {
-                dispatch(
-                  toggleTaskStatusFetch({ completed: true, id: task.id }),
-                );
+                dispatch(toggleTaskStatus({ completed: true, id: task.id }));
               } else if (!allCompleted && !task.completed) {
-                dispatch(
-                  toggleTaskStatusFetch({ completed: false, id: task.id }),
-                );
+                dispatch(toggleTaskStatus({ completed: false, id: task.id }));
               }
             });
           }}

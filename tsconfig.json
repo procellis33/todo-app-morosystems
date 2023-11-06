@@ -4,10 +4,10 @@
     "useDefineForClassFields": true, // Use ECMAScript 3-compatible method for class fields
 
     // Targeting Specific ECMAScript Version
-    "target": "ES2020", // Target ECMAScript 2020
+    "target": "ES2021", // Target ECMAScript 2021
 
     // Library Declarations
-    "lib": ["ES2020", "DOM", "DOM.Iterable"], // Included libraries for compilation
+    "lib": ["ES2021", "DOM", "DOM.Iterable"], // Included libraries for compilation
 
     // Module Resolution Strategy
     "module": "ESNext", // Use ECMAScript modules

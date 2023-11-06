@@ -1,12 +1,15 @@
 import { call, type Effect, put, takeEvery } from "redux-saga/effects";
 
-import { type TDeleteTask, type TTaskError } from "../../types/tasks_types";
+import {
+  type TDeleteTask,
+  type TTaskError,
+} from "../../interfaces-types/tasks";
 
 import { type PayloadAction } from "@reduxjs/toolkit";
 import { BASE_API_LINK } from "../../constants";
 import { deleteTaskSuccess, tasksFailure } from "../reducers/tasksSlice";
 
-function* workDeleteTaskSaga(
+function* workDeleteTask(
   action: PayloadAction<TDeleteTask>,
 ): Generator<any, void, any> {
   const response: Response = yield call(
@@ -37,7 +40,7 @@ function* workDeleteTaskSaga(
 function* deleteTaskSaga(): Generator<Effect, void, unknown> {
   yield takeEvery(
     "tasks/deleteTaskFetch",
-    (action: PayloadAction<TDeleteTask>) => workDeleteTaskSaga(action),
+    (action: PayloadAction<TDeleteTask>) => workDeleteTask(action),
   );
 }
 

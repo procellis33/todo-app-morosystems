@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 
-interface TDeviceParams {
+interface IDeviceParams {
   width: number;
   height: number;
 }
 
-const useDeviceParams = (): TDeviceParams => {
-  const [deviceParams, setDeviceParams] = useState<TDeviceParams>({
+const useDeviceParams = (): IDeviceParams => {
+  const [deviceParams, setDeviceParams] = useState<IDeviceParams>({
     width: document.documentElement.clientWidth,
     height: document.documentElement.clientHeight,
   });

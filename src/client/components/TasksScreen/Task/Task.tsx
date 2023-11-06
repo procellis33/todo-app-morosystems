@@ -6,20 +6,20 @@ import {
   StyledInput,
   StyledWrapper,
 } from "./Task.style";
-import { type TTask } from "../../../types/tasks_types";
+import { type ITask } from "../../../interfaces-types/tasks";
 import { useAppDispatch } from "../../../redux/hooks";
 import {
-  deleteTaskFetch,
-  modifyTaskFetch,
-  toggleTaskStatusFetch,
+  deleteTask,
+  modifyTask,
+  toggleTaskStatus,
 } from "../../../redux/reducers/tasksSlice";
 import { MdDeleteOutline } from "react-icons/md";
 
-interface TaskProps {
-  task: TTask;
+interface ITaskProps {
+  task: ITask;
 }
 
-const Task: React.FC<TaskProps> = ({ task }) => {
+const Task: React.FC<ITaskProps> = ({ task }) => {
   const [checked, setChecked] = useState(task.completed);
   const [showDelete, setShowDelete] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -28,7 +28,7 @@ const Task: React.FC<TaskProps> = ({ task }) => {
 
   const textInputRef: React.LegacyRef<HTMLInputElement> | null = useRef(null);
   const handleChange = (): void => {
-    dispatch(toggleTaskStatusFetch({ completed: checked, id: task.id }));
+    dispatch(toggleTaskStatus({ completed: checked, id: task.id }));
   };
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const Task: React.FC<TaskProps> = ({ task }) => {
   };
 
   const handleAnimationEnd = (e: React.AnimationEvent): void => {
-    if (e.target === wrapperRef.current) dispatch(deleteTaskFetch(task.id));
+    if (e.target === wrapperRef.current) dispatch(deleteTask(task.id));
   };
   return (
     <StyledWrapper
@@ -70,10 +70,10 @@ const Task: React.FC<TaskProps> = ({ task }) => {
           setShowDelete(true);
         }}
         ref={textInputRef}
-        onBlur={(e) => {
+        onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
           if (e.target.value === "") setIsDeleting(true);
           else if (e.target.value !== task.text)
-            dispatch(modifyTaskFetch({ text: e.target.value, id: task.id }));
+            dispatch(modifyTask({ text: e.target.value, id: task.id }));
         }}
         onKeyDown={handleKeyDown}
       />

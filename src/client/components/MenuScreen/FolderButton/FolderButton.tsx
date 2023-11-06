@@ -6,10 +6,10 @@ import {
   IconWrapper,
   Label,
   StyledFolderButton,
-} from "./Folder.style";
-import { type TOpenMenu } from "../../../pages/Home/HomePage";
+} from "./FolderButton.style";
+import { type IOpenMenu } from "../../../interfaces-types/menu";
 
-interface TFolder {
+interface IFolder {
   tasksCount: number;
   Icon: IconType;
   label: "All" | "Active" | "Completed";
@@ -18,11 +18,11 @@ interface TFolder {
     React.SetStateAction<"All" | "Active" | "Completed">
   >;
   selected: boolean;
-  openMenu: TOpenMenu;
-  setOpenMenu: React.Dispatch<React.SetStateAction<TOpenMenu>>;
+  openMenu: IOpenMenu;
+  setOpenMenu: React.Dispatch<React.SetStateAction<IOpenMenu>>;
 }
 
-const FolderButton: React.FC<TFolder> = ({
+const FolderButton: React.FC<IFolder> = ({
   tasksCount,
   Icon,
   label,

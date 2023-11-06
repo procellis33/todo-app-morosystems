@@ -1,17 +1,17 @@
 import { call, type Effect, put, takeEvery } from "redux-saga/effects";
 
 import {
-  type TModifyTask,
-  type TTask,
+  type IModifyTask,
+  type ITask,
   type TTaskError,
-} from "../../types/tasks_types";
+} from "../../interfaces-types/tasks";
 
 import { type PayloadAction } from "@reduxjs/toolkit";
 import { BASE_API_LINK } from "../../constants";
 import { modifyTaskSuccess, tasksFailure } from "../reducers/tasksSlice";
 
-function* workModifyTaskSaga(
-  action: PayloadAction<TModifyTask>,
+function* workModifyTask(
+  action: PayloadAction<IModifyTask>,
 ): Generator<any, void, any> {
   const { text, id } = action.payload;
   const response: Response = yield call(fetch, BASE_API_LINK + "/tasks/" + id, {
@@ -31,7 +31,7 @@ function* workModifyTaskSaga(
     contentType !== null &&
     contentType.includes("application/json")
   ) {
-    const modifiedTask: TTask = yield response.json();
+    const modifiedTask: ITask = yield response.json();
     yield put(modifyTaskSuccess(modifiedTask));
   } else if (
     !response.ok &&
@@ -46,7 +46,7 @@ function* workModifyTaskSaga(
 function* modifyTaskSaga(): Generator<Effect, void, unknown> {
   yield takeEvery(
     "tasks/modifyTaskFetch",
-    (action: PayloadAction<TModifyTask>) => workModifyTaskSaga(action),
+    (action: PayloadAction<IModifyTask>) => workModifyTask(action),
   );
 }
 

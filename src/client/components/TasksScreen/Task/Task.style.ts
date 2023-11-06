@@ -1,8 +1,9 @@
 import styled, { css, keyframes } from "styled-components";
 import {
-  type TStyledInput,
-  type TWrapper,
-} from "../../../types/task_component_types";
+  type IStyledInput,
+  type IWrapper,
+} from "../../../interfaces-types/task";
+import { COMPLETED_TASK_COLOR } from "../../../constants";
 
 const slideIn = keyframes`
   from {
@@ -42,7 +43,7 @@ const taskWasSelected = keyframes`
 
 export const StyledInput = styled.input.withConfig({
   shouldForwardProp: (prop) => !["isSelected"].includes(prop),
-})<TStyledInput>`
+})<IStyledInput>`
   background-image: linear-gradient(#90c91f, #3bc51b),
     linear-gradient(#bfbfbf, #bfbfbf);
   border: 0 none;
@@ -139,7 +140,7 @@ export const StyledCheckmark = styled.span`
   }
 
   ${StyledCheckbox} input:checked ~ & {
-    background-color: #18af00;
+    background-color: ${COMPLETED_TASK_COLOR};
   }
 
   &:after {
@@ -167,7 +168,7 @@ export const StyledCheckmark = styled.span`
 
 export const StyledWrapper = styled.div.withConfig({
   shouldForwardProp: (prop) => !["beforeDelete"].includes(prop),
-})<TWrapper>`
+})<IWrapper>`
   animation: ${({ beforeDelete }) =>
     beforeDelete
       ? css`

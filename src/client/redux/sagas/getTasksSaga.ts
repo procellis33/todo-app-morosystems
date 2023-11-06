@@ -2,7 +2,7 @@ import { call, put, takeEvery, type Effect } from "redux-saga/effects";
 
 import { tasksFailure, getTasksSuccess } from "../reducers/tasksSlice";
 import { BASE_API_LINK } from "../../constants";
-import { type TTaskError, type TTask } from "../../types/tasks_types";
+import { type TTaskError, type ITask } from "../../interfaces-types/tasks";
 
 function* workGetTasksFetch(): Generator<any, void, any> {
   const response: Response = yield call(fetch, BASE_API_LINK + "/tasks", {
@@ -19,7 +19,7 @@ function* workGetTasksFetch(): Generator<any, void, any> {
     contentType !== null &&
     contentType.includes("application/json")
   ) {
-    const tasksArray: TTask[] = yield response.json();
+    const tasksArray: ITask[] = yield response.json();
     yield put(getTasksSuccess(tasksArray));
   } else if (
     !response.ok &&

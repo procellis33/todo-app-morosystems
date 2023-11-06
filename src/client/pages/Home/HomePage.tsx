@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { getTasksFetch, tasksFailure } from "../../redux/reducers/tasksSlice";
+import { getTasks, tasksFailure } from "../../redux/reducers/tasksSlice";
 import MenuScreen from "../../components/MenuScreen/MenuScreen";
-import { type TTask } from "../../types/tasks_types";
+import { type ITask } from "../../interfaces-types/tasks";
 import TasksScreen from "../../components/TasksScreen/TasksScreen";
 import {
   ErrorAlert,
@@ -10,18 +10,12 @@ import {
   ErrorAlertSpan,
   ErrorAlertText,
   StyledHomeWrapper,
-} from "./Home.style";
+} from "./HomePage.style";
 import { RxCross2 } from "react-icons/rx";
-import {
-  StyledMenuButton,
-  StyledMenuButtonLine,
-} from "../../components/MenuScreen/MenuScreen.style";
 import useDeviceParams from "../../hooks/useDeviceParams";
+import { type IOpenMenu } from "../../interfaces-types/menu";
+import NavPhone from "../../components/NavPhone/NavPhone";
 
-export interface TOpenMenu {
-  opened: boolean;
-  flag: boolean;
-}
 const HomePage: React.FC = () => {
   const [completedTasks, setCompletedTasks] = useState(0);
   const [selectedButton, setSelectedButton] = useState<
@@ -29,11 +23,11 @@ const HomePage: React.FC = () => {
   >("All");
   const tasks = useAppSelector((state) => state.tasks.tasks);
   const errorMessage = useAppSelector((state) => state.tasks.errorMessage);
-  const [filteredTasks, setFilteredTasks] = useState<TTask[]>([]);
+  const [filteredTasks, setFilteredTasks] = useState<ITask[]>([]);
   const dispatch = useAppDispatch();
   const deviceParams = useDeviceParams();
 
-  const [openMenu, setOpenMenu] = useState<TOpenMenu>({
+  const [openMenu, setOpenMenu] = useState<IOpenMenu>({
     opened: deviceParams.width > 900,
     flag: deviceParams.width <= 900,
   });
@@ -49,7 +43,7 @@ const HomePage: React.FC = () => {
     filterTasks(tasks);
   }, [tasks, selectedButton]);
 
-  const filterTasks = (tasks: TTask[]): void => {
+  const filterTasks = (tasks: ITask[]): void => {
     if (selectedButton === "All") setFilteredTasks(tasks);
     else if (selectedButton === "Active")
       setFilteredTasks(tasks.filter((task) => !task.completed));
@@ -58,7 +52,7 @@ const HomePage: React.FC = () => {
   };
 
   useEffect(() => {
-    dispatch(getTasksFetch());
+    dispatch(getTasks());
   }, []);
 
   useEffect(() => {
@@ -70,25 +64,7 @@ const HomePage: React.FC = () => {
 
   return (
     <StyledHomeWrapper>
-      <StyledMenuButton
-        isPressed={openMenu.opened}
-        onClick={() => {
-          if (openMenu.opened)
-            setOpenMenu((prevState) => ({
-              ...prevState,
-              opened: false,
-            }));
-          else
-            setOpenMenu((prevState) => ({
-              ...prevState,
-              opened: true,
-            }));
-        }}
-      >
-        <StyledMenuButtonLine isPressed={openMenu.opened} />
-        <StyledMenuButtonLine isPressed={openMenu.opened} />
-        <StyledMenuButtonLine isPressed={openMenu.opened} />
-      </StyledMenuButton>
+      <NavPhone opened={openMenu.opened} setOpenMenu={setOpenMenu} />
 
       {openMenu.opened && (
         <MenuScreen

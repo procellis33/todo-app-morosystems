@@ -1,4 +1,4 @@
-export interface TTask {
+export interface ITask {
   id: string;
   text: string;
   completed: boolean;
@@ -12,12 +12,12 @@ export type TCreateTask = string;
 
 export type TDeleteTask = string;
 
-export interface TModifyTask {
+export interface IModifyTask {
   text: string;
   id: string;
 }
 
-export interface TToggleTaskStatus {
+export interface IToggleTaskStatus {
   completed: boolean;
   id: string;
 }

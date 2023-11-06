@@ -1,23 +1,28 @@
 import React from "react";
-import FolderButton from "./Folder/FolderButton";
+import FolderButton from "./FolderButton/FolderButton";
 import { BsFillCollectionFill } from "react-icons/bs";
 import { AiOutlineCheck } from "react-icons/ai";
 import { LuListTodo } from "react-icons/lu";
 import { StyledMenuScreen } from "./MenuScreen.style";
-import { type TOpenMenu } from "../../pages/Home/HomePage";
+import { type IOpenMenu } from "../../interfaces-types/menu";
+import {
+  ACTIVE_FOLDER_COLOR,
+  ALL_FOLDER_COLOR,
+  COMPLETED_FOLDER_COLOR,
+} from "../../constants";
 
-interface MenuScreenProps {
+interface IMenuScreenProps {
   completedTasks: number;
   allTasks: number;
   selectedButton: "All" | "Active" | "Completed";
   setSelectedButton: React.Dispatch<
     React.SetStateAction<"All" | "Active" | "Completed">
   >;
-  openMenu: TOpenMenu;
-  setOpenMenu: React.Dispatch<React.SetStateAction<TOpenMenu>>;
+  openMenu: IOpenMenu;
+  setOpenMenu: React.Dispatch<React.SetStateAction<IOpenMenu>>;
 }
 
-const MenuScreen: React.FC<MenuScreenProps> = ({
+const MenuScreen: React.FC<IMenuScreenProps> = ({
   completedTasks,
   allTasks,
   selectedButton,
@@ -31,7 +36,7 @@ const MenuScreen: React.FC<MenuScreenProps> = ({
         tasksCount={allTasks}
         Icon={BsFillCollectionFill}
         label={"All"}
-        folderColor={"#000"}
+        folderColor={ALL_FOLDER_COLOR}
         setSelectedButton={setSelectedButton}
         selected={selectedButton === "All"}
         openMenu={openMenu}
@@ -41,7 +46,7 @@ const MenuScreen: React.FC<MenuScreenProps> = ({
         tasksCount={completedTasks}
         Icon={AiOutlineCheck}
         label={"Completed"}
-        folderColor={"#18af00"}
+        folderColor={COMPLETED_FOLDER_COLOR}
         setSelectedButton={setSelectedButton}
         selected={selectedButton === "Completed"}
         openMenu={openMenu}
@@ -51,7 +56,7 @@ const MenuScreen: React.FC<MenuScreenProps> = ({
         tasksCount={allTasks - completedTasks}
         Icon={LuListTodo}
         label={"Active"}
-        folderColor={"#198fee"}
+        folderColor={ACTIVE_FOLDER_COLOR}
         setSelectedButton={setSelectedButton}
         selected={selectedButton === "Active"}
         openMenu={openMenu}

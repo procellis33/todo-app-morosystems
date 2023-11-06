@@ -2,15 +2,15 @@ import { call, type Effect, put, takeEvery } from "redux-saga/effects";
 
 import {
   type TCreateTask,
-  type TTask,
+  type ITask,
   type TTaskError,
-} from "../../types/tasks_types";
+} from "../../interfaces-types/tasks";
 
 import { type PayloadAction } from "@reduxjs/toolkit";
 import { BASE_API_LINK } from "../../constants";
 import { createTaskSuccess, tasksFailure } from "../reducers/tasksSlice";
 
-function* workCreateTaskSaga(
+function* workCreateTask(
   action: PayloadAction<TCreateTask>,
 ): Generator<any, void, any> {
   const response: Response = yield call(fetch, BASE_API_LINK + "/tasks", {
@@ -30,7 +30,7 @@ function* workCreateTaskSaga(
     contentType !== null &&
     contentType.includes("application/json")
   ) {
-    const newTask: TTask = yield response.json();
+    const newTask: ITask = yield response.json();
     yield put(createTaskSuccess(newTask));
   } else if (
     !response.ok &&
@@ -45,7 +45,7 @@ function* workCreateTaskSaga(
 function* createTaskSaga(): Generator<Effect, void, unknown> {
   yield takeEvery(
     "tasks/createTaskFetch",
-    (action: PayloadAction<TCreateTask>) => workCreateTaskSaga(action),
+    (action: PayloadAction<TCreateTask>) => workCreateTask(action),
   );
 }
 

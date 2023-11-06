@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import {
-  type IconWrapperProps,
-  type StyledFolderButtonProps,
-} from "../../../types/folder_component_types";
+  type IIconWrapperProps,
+  type IStyledFolderButtonProps,
+} from "../../../interfaces-types/folder";
 
 export const FolderTop = styled.div`
   display: flex;
@@ -12,7 +12,7 @@ export const FolderTop = styled.div`
 
 export const IconWrapper = styled("div").withConfig({
   shouldForwardProp: (prop) => !["folderColor"].includes(prop),
-})<IconWrapperProps>`
+})<IIconWrapperProps>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,7 +39,7 @@ export const Label = styled.div`
 export const StyledFolderButton = styled("div").withConfig({
   shouldForwardProp: (prop) =>
     !["folderColor", "selectedButton"].includes(prop),
-})<StyledFolderButtonProps>`
+})<IStyledFolderButtonProps>`
   background-color: ${({ selectedButton, folderColor }) =>
     selectedButton ? folderColor : "white"};
   margin: 10px;
@@ -52,6 +52,7 @@ export const StyledFolderButton = styled("div").withConfig({
   flex-direction: column;
   justify-content: space-between;
   cursor: default;
+  user-select: none;
 
   ${Label}, ${Counter} {
     color: ${({ selectedButton, folderColor }) =>

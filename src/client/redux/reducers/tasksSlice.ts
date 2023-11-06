@@ -2,24 +2,34 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import {
   type TCreateTask,
   type TTaskError,
-  type TTask,
+  type ITask,
   type TDeleteTask,
-  type TModifyTask,
-  type TToggleTaskStatus,
-} from "../../types/tasks_types";
+  type IModifyTask,
+  type IToggleTaskStatus,
+} from "../../interfaces-types/tasks";
 
-interface TInitialState {
-  tasks: TTask[];
-  completedTasks: TTask[];
+interface IInitialState {
+  tasks: ITask[];
+  completedTasks: ITask[];
   isLoading: boolean;
   errorMessage: string;
 }
 
-const initialState: TInitialState = {
+const initialState: IInitialState = {
   tasks: [],
   completedTasks: [],
   isLoading: false,
   errorMessage: "",
+};
+
+const createFetchAction = (state: IInitialState): void => {
+  state.isLoading = true;
+  state.errorMessage = "";
+};
+
+const createSuccessAction = (state: IInitialState): void => {
+  state.isLoading = false;
+  state.errorMessage = "";
 };
 
 const tasksSlice = createSlice({
@@ -28,62 +38,50 @@ const tasksSlice = createSlice({
   reducers: {
     toggleTaskStatusFetch: (
       state,
-      _action: PayloadAction<TToggleTaskStatus>,
+      _action: PayloadAction<IToggleTaskStatus>,
     ) => {
-      state.isLoading = true;
-      state.errorMessage = "";
+      createFetchAction(state);
     },
-    modifyTaskFetch: (state, _action: PayloadAction<TModifyTask>) => {
-      state.isLoading = true;
-      state.errorMessage = "";
+    modifyTaskFetch: (state, _action: PayloadAction<IModifyTask>) => {
+      createFetchAction(state);
     },
-    modifyTaskSuccess: (state, action: PayloadAction<TTask>) => {
+    modifyTaskSuccess: (state, action: PayloadAction<ITask>) => {
+      createSuccessAction(state);
       const updatedTask = action.payload;
 
       state.tasks = state.tasks.map((task) =>
         task.id === updatedTask.id ? updatedTask : task,
       );
-
-      state.isLoading = false;
-      state.errorMessage = "";
     },
     deleteTaskFetch: (state, _action: PayloadAction<TDeleteTask>) => {
-      state.isLoading = true;
-      state.errorMessage = "";
+      createFetchAction(state);
     },
     deleteTaskSuccess: (state, action: PayloadAction<TDeleteTask>) => {
+      createSuccessAction(state);
       state.tasks = state.tasks.filter((task) => task.id !== action.payload);
-      state.isLoading = false;
-      state.errorMessage = "";
     },
     createTaskFetch: (state, _action: PayloadAction<TCreateTask>) => {
-      state.isLoading = true;
-      state.errorMessage = "";
+      createFetchAction(state);
     },
-    createTaskSuccess: (state, action: PayloadAction<TTask>) => {
+    createTaskSuccess: (state, action: PayloadAction<ITask>) => {
+      createSuccessAction(state);
       state.tasks.unshift(action.payload);
-      state.isLoading = false;
-      state.errorMessage = "";
     },
     getCompletedTasksFetch: (state) => {
-      state.isLoading = true;
-      state.errorMessage = "";
+      createFetchAction(state);
     },
-    getCompletedTasksSuccess: (state, action: PayloadAction<TTask[]>) => {
+    getCompletedTasksSuccess: (state, action: PayloadAction<ITask[]>) => {
+      createSuccessAction(state);
       state.completedTasks = action.payload;
-      state.isLoading = false;
-      state.errorMessage = "";
     },
     getTasksFetch: (state) => {
-      state.isLoading = true;
-      state.errorMessage = "";
+      createFetchAction(state);
     },
-    getTasksSuccess: (state, action: PayloadAction<TTask[]>) => {
+    getTasksSuccess: (state, action: PayloadAction<ITask[]>) => {
+      createSuccessAction(state);
       state.tasks = action.payload
         .slice()
         .sort((a, b) => b.createdDate - a.createdDate);
-      state.isLoading = false;
-      state.errorMessage = "";
     },
     tasksFailure: (state, action: PayloadAction<TTaskError>) => {
       state.errorMessage = action.payload;
@@ -93,17 +91,17 @@ const tasksSlice = createSlice({
 });
 
 export const {
-  getTasksFetch,
+  getTasksFetch: getTasks,
   getTasksSuccess,
   tasksFailure,
   getCompletedTasksSuccess,
-  getCompletedTasksFetch,
-  createTaskFetch,
+  getCompletedTasksFetch: getCompletedTasks,
+  createTaskFetch: createTask,
   createTaskSuccess,
   deleteTaskSuccess,
-  deleteTaskFetch,
-  modifyTaskFetch,
+  deleteTaskFetch: deleteTask,
+  modifyTaskFetch: modifyTask,
   modifyTaskSuccess,
-  toggleTaskStatusFetch,
+  toggleTaskStatusFetch: toggleTaskStatus,
 } = tasksSlice.actions;
 export default tasksSlice.reducer;
