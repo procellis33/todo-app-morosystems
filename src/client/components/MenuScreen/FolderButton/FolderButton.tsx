@@ -45,6 +45,16 @@ const FolderButton: React.FC<IFolder> = ({
     if (!selected) setSelectedButton(buttonId);
   };
 
+  // * Select a folder if it's mobile version => close menu
+  const selectFolderClicked = (): void => {
+    if (openMenu.opened && openMenu.mobile)
+      setOpenMenu((prevState) => ({
+        ...prevState,
+        opened: false,
+      }));
+    selectFolder(label);
+  };
+
   return (
     <>
       <StyledFolderButton
@@ -52,14 +62,7 @@ const FolderButton: React.FC<IFolder> = ({
         selectedButton={selected}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        onClick={() => {
-          if (openMenu.opened && openMenu.flag)
-            setOpenMenu((prevState) => ({
-              ...prevState,
-              opened: false,
-            }));
-          selectFolder(label);
-        }}
+        onClick={selectFolderClicked}
       >
         <FolderTop>
           <IconWrapper folderColor={folderColor ?? "#000"}>

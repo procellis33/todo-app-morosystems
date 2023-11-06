@@ -90,6 +90,7 @@ const tasksSlice = createSlice({
   },
 });
 
+// * Renaming some reducers for better usability in code
 export const {
   getTasksFetch: getTasks,
   getTasksSuccess,

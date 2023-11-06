@@ -17,21 +17,24 @@ import { type IOpenMenu } from "../../interfaces-types/menu";
 import NavPhone from "../../components/NavPhone/NavPhone";
 
 const HomePage: React.FC = () => {
+  const [filteredTasks, setFilteredTasks] = useState<ITask[]>([]);
   const [completedTasks, setCompletedTasks] = useState(0);
   const [selectedButton, setSelectedButton] = useState<
     "All" | "Active" | "Completed"
   >("All");
-  const tasks = useAppSelector((state) => state.tasks.tasks);
-  const errorMessage = useAppSelector((state) => state.tasks.errorMessage);
-  const [filteredTasks, setFilteredTasks] = useState<ITask[]>([]);
-  const dispatch = useAppDispatch();
-  const deviceParams = useDeviceParams();
 
+  // * Using custom hook to identify which menu version to use
+  const deviceParams = useDeviceParams();
   const [openMenu, setOpenMenu] = useState<IOpenMenu>({
     opened: deviceParams.width > 900,
-    flag: deviceParams.width <= 900,
+    mobile: deviceParams.width <= 900,
   });
 
+  const tasks = useAppSelector((state) => state.tasks.tasks);
+  const errorMessage = useAppSelector((state) => state.tasks.errorMessage);
+  const dispatch = useAppDispatch();
+
+  // * Count/Filter data to display
   useEffect(() => {
     const sumOfCompletedTasks = tasks.reduce((accumulator, currentValue) => {
       if (currentValue.completed) {
@@ -43,6 +46,7 @@ const HomePage: React.FC = () => {
     filterTasks(tasks);
   }, [tasks, selectedButton]);
 
+  // * Based on GET /tasks API filter appropriate data for selected section
   const filterTasks = (tasks: ITask[]): void => {
     if (selectedButton === "All") setFilteredTasks(tasks);
     else if (selectedButton === "Active")
@@ -51,16 +55,17 @@ const HomePage: React.FC = () => {
       setFilteredTasks(tasks.filter((task) => task.completed));
   };
 
+  // * Manage page resize Mobile/PC menu
+  useEffect(() => {
+    if (deviceParams.width > 900) {
+      setOpenMenu({ opened: true, mobile: false });
+    } else if (!openMenu.mobile && openMenu.opened)
+      setOpenMenu({ opened: false, mobile: true });
+  }, [deviceParams]);
+
   useEffect(() => {
     dispatch(getTasks());
   }, []);
-
-  useEffect(() => {
-    if (deviceParams.width > 900) {
-      setOpenMenu({ opened: true, flag: false });
-    } else if (!openMenu.flag && openMenu.opened)
-      setOpenMenu({ opened: false, flag: true });
-  }, [deviceParams]);
 
   return (
     <StyledHomeWrapper>

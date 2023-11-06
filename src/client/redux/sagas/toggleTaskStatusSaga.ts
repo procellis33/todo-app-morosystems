@@ -28,6 +28,7 @@ function* workToggleStatus(
 
   const contentType = response.headers.get("content-type");
 
+  // * Checking response headers. Showing custom error or error from server
   if (
     response.ok &&
     contentType !== null &&

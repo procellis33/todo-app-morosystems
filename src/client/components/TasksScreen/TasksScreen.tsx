@@ -28,18 +28,34 @@ const TasksScreen: React.FC<IAsksScreenProps> = ({
   const textInputRef: React.LegacyRef<HTMLInputElement> | undefined =
     useRef(null);
   const dispatch = useAppDispatch();
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): void => {
-    if (e.key === "Enter") {
-      textInputRef.current?.blur();
-      createTaskClicked();
-    }
-  };
+
   const [allCompleted, setAllCompleted] = useState(false);
   useEffect(() => {
     setAllCompleted(
       !tasksAll.some((task) => !task.completed) && tasksAll.length !== 0,
     );
   }, [tasksAll]);
+
+  // * Complete all tasks if at least one is incomplete. Else incompleteAll
+  const completeAllClicked = (): void => {
+    const allCompleted = !tasksAll.some((task) => !task.completed);
+    tasksAll.forEach((task) => {
+      if (allCompleted && task.completed) {
+        dispatch(toggleTaskStatus({ completed: true, id: task.id }));
+      } else if (!allCompleted && !task.completed) {
+        dispatch(toggleTaskStatus({ completed: false, id: task.id }));
+      }
+    });
+  };
+
+  // * Checking if 'Enter' was pressed to start creating new task
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): void => {
+    if (e.key === "Enter") {
+      textInputRef.current?.blur();
+      createTaskClicked();
+    }
+  };
+  // * Creating new task if field isn't empty
   const createTaskClicked = (): void => {
     if (textInputRef?.current !== undefined && textInputRef.current !== null) {
       const text = textInputRef.current.value;
@@ -62,19 +78,7 @@ const TasksScreen: React.FC<IAsksScreenProps> = ({
           ref={textInputRef}
           onKeyDown={handleKeyDown}
         />
-        <StyledIcon
-          allCompleted={allCompleted}
-          onClick={() => {
-            const allCompleted = !tasksAll.some((task) => !task.completed);
-            tasksAll.forEach((task) => {
-              if (allCompleted && task.completed) {
-                dispatch(toggleTaskStatus({ completed: true, id: task.id }));
-              } else if (!allCompleted && !task.completed) {
-                dispatch(toggleTaskStatus({ completed: false, id: task.id }));
-              }
-            });
-          }}
-        >
+        <StyledIcon allCompleted={allCompleted} onClick={completeAllClicked}>
           <IoIosArrowDropdown size={30} color={"#5d5d5d"} />
         </StyledIcon>
       </StyledWrapper>

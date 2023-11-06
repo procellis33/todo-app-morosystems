@@ -20,16 +20,6 @@ export const StyledDeleteIcon = styled.div`
   animation: ${slideIn} 0.3s ease forwards;
 `;
 
-const fadeOut = keyframes`
-  from {
-    opacity: 1;
-    
-  }
-  to {
-    opacity: 0;
-  }
-`;
-
 const taskWasSelected = keyframes`
   from {
     opacity: 1;
@@ -97,7 +87,7 @@ export const StyledInput = styled.input.withConfig({
 `;
 
 export const StyledCheckbox = styled.label`
-  display: inline-block; /* Use inline-block to center vertically */
+  display: inline-block;
   position: relative;
   padding-left: 35px;
   margin-bottom: 12px;
@@ -166,6 +156,15 @@ export const StyledCheckmark = styled.span`
   }
 `;
 
+const fadeOut = keyframes`
+  from {
+    opacity: 1;
+    
+  }
+  to {
+    opacity: 0;
+  }
+`;
 export const StyledWrapper = styled.div.withConfig({
   shouldForwardProp: (prop) => !["beforeDelete"].includes(prop),
 })<IWrapper>`

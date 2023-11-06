@@ -5,6 +5,7 @@ interface IDeviceParams {
   height: number;
 }
 
+// * Creating custom hook to use device width and height easier
 const useDeviceParams = (): IDeviceParams => {
   const [deviceParams, setDeviceParams] = useState<IDeviceParams>({
     width: document.documentElement.clientWidth,

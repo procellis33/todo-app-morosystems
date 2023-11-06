@@ -4,5 +4,5 @@ export interface IStyledMenuButton {
 
 export interface IOpenMenu {
   opened: boolean;
-  flag: boolean;
+  mobile: boolean;
 }

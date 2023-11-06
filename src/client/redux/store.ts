@@ -10,6 +10,8 @@ import modifyTaskSaga from "./sagas/modifyTaskSaga";
 import toggleTaskStatusSaga from "./sagas/toggleTaskStatusSaga";
 
 const saga = createSagaMiddleware();
+
+// * Combining all saga effects
 function* rootSaga(): Generator<
   AllEffect<Generator<Effect<any, any>, void, unknown>>,
   void,
