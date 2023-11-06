@@ -18,7 +18,7 @@ import {
 } from "../../components/MenuScreen/MenuScreen.style";
 import useDeviceParams from "../../hooks/useDeviceParams";
 
-interface TOpenMenu {
+export interface TOpenMenu {
   opened: boolean;
   flag: boolean;
 }
@@ -96,6 +96,8 @@ const HomePage: React.FC = () => {
           allTasks={tasks.length}
           selectedButton={selectedButton}
           setSelectedButton={setSelectedButton}
+          openMenu={openMenu}
+          setOpenMenu={setOpenMenu}
         />
       )}
       <TasksScreen

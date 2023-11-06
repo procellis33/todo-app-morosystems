@@ -19,7 +19,7 @@ export const StyledEmptySign = styled.h1`
 export const StyledWrapper = styled.div`
   border-radius: 15px;
   width: 90%;
-  border: 1px solid;
+  border: 1px solid #5d5d5d;
   outline: none;
   margin: 10px 0 30px 0;
   display: flex;

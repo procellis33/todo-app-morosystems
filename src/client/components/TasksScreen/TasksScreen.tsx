@@ -56,10 +56,12 @@ const TasksScreen: React.FC<TasksScreenProps> = ({
       <StyledHeader>todos</StyledHeader>
       <StyledWrapper>
         <div onClick={createTask}>
-          <IoCreateOutline size={40} />
+          <IoCreateOutline size={40} color={"#5d5d5d"} />
         </div>
         <StyledTextInput
           type={"text"}
+          id={"createTask"}
+          placeholder={"What needs to be done?"}
           ref={textInputRef}
           onKeyDown={handleKeyDown}
         />
@@ -80,7 +82,7 @@ const TasksScreen: React.FC<TasksScreenProps> = ({
             });
           }}
         >
-          <IoIosArrowDropdown size={30} />
+          <IoIosArrowDropdown size={30} color={"#5d5d5d"} />
         </StyledIcon>
       </StyledWrapper>
       {allTasksCount === 0 && (

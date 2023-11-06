@@ -7,6 +7,7 @@ import {
   Label,
   StyledFolderButton,
 } from "./Folder.style";
+import { type TOpenMenu } from "../../../pages/Home/HomePage";
 
 interface TFolder {
   tasksCount: number;
@@ -17,6 +18,8 @@ interface TFolder {
     React.SetStateAction<"All" | "Active" | "Completed">
   >;
   selected: boolean;
+  openMenu: TOpenMenu;
+  setOpenMenu: React.Dispatch<React.SetStateAction<TOpenMenu>>;
 }
 
 const FolderButton: React.FC<TFolder> = ({
@@ -26,6 +29,8 @@ const FolderButton: React.FC<TFolder> = ({
   folderColor,
   setSelectedButton,
   selected,
+  openMenu,
+  setOpenMenu,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const handleMouseEnter = (): void => {
@@ -48,13 +53,18 @@ const FolderButton: React.FC<TFolder> = ({
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onClick={() => {
+          if (openMenu.opened && openMenu.flag)
+            setOpenMenu((prevState) => ({
+              ...prevState,
+              opened: false,
+            }));
           selectFolder(label);
         }}
       >
         <FolderTop>
           <IconWrapper folderColor={folderColor ?? "#000"}>
             <Icon
-              size={30}
+              size={28}
               color={isHovered || selected ? folderColor ?? "#000" : "#fff"}
             />
           </IconWrapper>

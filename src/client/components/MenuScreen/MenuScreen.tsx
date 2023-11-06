@@ -4,6 +4,7 @@ import { BsFillCollectionFill } from "react-icons/bs";
 import { AiOutlineCheck } from "react-icons/ai";
 import { LuListTodo } from "react-icons/lu";
 import { StyledMenuScreen } from "./MenuScreen.style";
+import { type TOpenMenu } from "../../pages/Home/HomePage";
 
 interface MenuScreenProps {
   completedTasks: number;
@@ -12,6 +13,8 @@ interface MenuScreenProps {
   setSelectedButton: React.Dispatch<
     React.SetStateAction<"All" | "Active" | "Completed">
   >;
+  openMenu: TOpenMenu;
+  setOpenMenu: React.Dispatch<React.SetStateAction<TOpenMenu>>;
 }
 
 const MenuScreen: React.FC<MenuScreenProps> = ({
@@ -19,6 +22,8 @@ const MenuScreen: React.FC<MenuScreenProps> = ({
   allTasks,
   selectedButton,
   setSelectedButton,
+  openMenu,
+  setOpenMenu,
 }) => {
   return (
     <StyledMenuScreen>
@@ -29,6 +34,8 @@ const MenuScreen: React.FC<MenuScreenProps> = ({
         folderColor={"#000"}
         setSelectedButton={setSelectedButton}
         selected={selectedButton === "All"}
+        openMenu={openMenu}
+        setOpenMenu={setOpenMenu}
       />
       <FolderButton
         tasksCount={completedTasks}
@@ -37,6 +44,8 @@ const MenuScreen: React.FC<MenuScreenProps> = ({
         folderColor={"#18af00"}
         setSelectedButton={setSelectedButton}
         selected={selectedButton === "Completed"}
+        openMenu={openMenu}
+        setOpenMenu={setOpenMenu}
       />
       <FolderButton
         tasksCount={allTasks - completedTasks}
@@ -45,6 +54,8 @@ const MenuScreen: React.FC<MenuScreenProps> = ({
         folderColor={"#198fee"}
         setSelectedButton={setSelectedButton}
         selected={selectedButton === "Active"}
+        openMenu={openMenu}
+        setOpenMenu={setOpenMenu}
       />
     </StyledMenuScreen>
   );
