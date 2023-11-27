@@ -22,6 +22,7 @@ interface ITaskProps {
 const Task: React.FC<ITaskProps> = ({ task }) => {
   const [checked, setChecked] = useState(task.completed);
   const [showDelete, setShowDelete] = useState(false);
+  const [taskIsFocused, setTaskIsFocused] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false);
   const dispatch = useAppDispatch();
   const wrapperRef: React.LegacyRef<HTMLDivElement> | null = useRef(null);
@@ -67,14 +68,16 @@ const Task: React.FC<ITaskProps> = ({ task }) => {
       </StyledCheckbox>
 
       <StyledInput
-        isSelected={task.completed}
+        isSelected={taskIsFocused ? false : task.completed}
         type="text"
         defaultValue={task.text}
         onFocus={() => {
           setShowDelete(true);
+          setTaskIsFocused(true)
         }}
         ref={textInputRef}
         onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
+          setTaskIsFocused(false)
           // * Deleting task if input was left empty or modify if value has changed
           if (e.target.value === "") setIsDeleting(true);
           else if (e.target.value !== task.text)
