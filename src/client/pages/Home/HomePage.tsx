@@ -18,7 +18,6 @@ import NavPhone from "../../components/NavPhone/NavPhone";
 
 const HomePage: React.FC = () => {
   const [filteredTasks, setFilteredTasks] = useState<ITask[]>([]);
-  const [completedTasks, setCompletedTasks] = useState(0);
   const [selectedButton, setSelectedButton] = useState<
     "All" | "Active" | "Completed"
   >("All");
@@ -36,13 +35,6 @@ const HomePage: React.FC = () => {
 
   // * Count/Filter data to display
   useEffect(() => {
-    const sumOfCompletedTasks = tasks.reduce((accumulator, currentValue) => {
-      if (currentValue.completed) {
-        return accumulator + 1;
-      }
-      return accumulator;
-    }, 0);
-    setCompletedTasks(sumOfCompletedTasks);
     filterTasks(tasks);
   }, [tasks, selectedButton]);
 
@@ -73,7 +65,7 @@ const HomePage: React.FC = () => {
 
       {openMenu.opened && (
         <MenuScreen
-          completedTasks={completedTasks}
+          completedTasks={tasks.filter((task) => task.completed).length}
           allTasks={tasks.length}
           selectedButton={selectedButton}
           setSelectedButton={setSelectedButton}
