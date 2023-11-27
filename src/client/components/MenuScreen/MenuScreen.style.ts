@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledMenuScreen = styled.div`
   background-color: rgba(186, 194, 197, 0.5);
-  width: 420px;
+  width: 220px;
   height: 100%;
   flex: 1;
   padding: 10px;
@@ -10,10 +10,6 @@ export const StyledMenuScreen = styled.div`
   flex-wrap: wrap;
   align-content: flex-start;
   position: fixed;
-
-  @media screen and (max-width: 1400px) {
-    width: 220px;
-  }
 
   @media screen and (max-width: 900px) {
     background-color: transparent;

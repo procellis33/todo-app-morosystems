@@ -59,16 +59,12 @@ export const StyledIcon = styled.div.withConfig({
 `;
 
 export const StyledTasksScreen = styled.div`
-  margin-left: 420px;
+  margin-left: 220px;
   flex: 1;
   display: flex;
   margin-bottom: 20px;
   flex-direction: column;
   align-items: center;
-
-  @media screen and (max-width: 1400px) {
-    margin-left: 220px;
-  }
 
   @media screen and (max-width: 900px) {
     margin-left: 0;
