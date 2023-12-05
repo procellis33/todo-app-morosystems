@@ -1,11 +1,11 @@
 import { call, type Effect, takeEvery } from "redux-saga/effects";
 
-import { type TCreateTask } from "../../interfaces-types/tasks";
+import { type TCreateTask } from "@interfaces-types/tasks";
 
 import { type PayloadAction } from "@reduxjs/toolkit";
 import { createTaskSuccess } from "../reducers/tasksSlice";
-import postApi from "../../api/postApi";
-import { handleApiResponse } from "../../api/handleApiResponce";
+import postApi from "@api/postApi";
+import { handleApiResponse } from "@api/handleApiResponce";
 
 function* workCreateTask(
   action: PayloadAction<TCreateTask>,

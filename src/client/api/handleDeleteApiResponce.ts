@@ -1,6 +1,6 @@
 import { put } from "redux-saga/effects";
-import { type TDeleteTask, type TTaskError } from "../interfaces-types/tasks";
-import { deleteTaskSuccess, tasksFailure } from "../redux/reducers/tasksSlice";
+import { type TDeleteTask, type TTaskError } from "@interfaces-types/tasks";
+import { deleteTaskSuccess, tasksFailure } from "@redux/reducers/tasksSlice";
 
 export function* handleDeleteApiResponse(
   response: Response,

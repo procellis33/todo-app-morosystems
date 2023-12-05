@@ -1,12 +1,12 @@
 import { put } from "redux-saga/effects";
-import { type ITask, type TTaskError } from "../interfaces-types/tasks";
+import { type ITask, type TTaskError } from "@interfaces-types/tasks";
 import {
   createTaskSuccess,
   getCompletedTasksSuccess,
   getTasksSuccess,
   modifyTaskSuccess,
   tasksFailure,
-} from "../redux/reducers/tasksSlice";
+} from "@redux/reducers/tasksSlice";
 
 type SuccessAction =
   | typeof createTaskSuccess

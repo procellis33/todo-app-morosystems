@@ -18,6 +18,17 @@ module.exports = [
         ],
         resolve: {
             extensions: [".js", ".ts", ".tsx", ".jsx"],
+            alias: {
+                "@api": path.resolve(__dirname, "src/client/api"),
+                "@assets": path.resolve(__dirname, "src/client/assets"),
+                "@components": path.resolve(__dirname, "src/client/components"),
+                "@hooks": path.resolve(__dirname, "src/client/hooks"),
+                "@interfaces-types": path.resolve(__dirname, "src/client/interfaces-types"),
+                "@pages": path.resolve(__dirname, "src/client/pages"),
+                "@redux": path.resolve(__dirname, "src/client/redux"),
+                "@constants.ts": path.resolve(__dirname, "src/client/constants.ts"),
+            }
+
         },
         module: {
             rules: [

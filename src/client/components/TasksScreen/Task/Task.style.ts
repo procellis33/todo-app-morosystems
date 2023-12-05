@@ -1,9 +1,6 @@
 import styled, { css, keyframes } from "styled-components";
-import {
-  type IStyledInput,
-  type IWrapper,
-} from "../../../interfaces-types/task";
-import { COMPLETED_TASK_COLOR } from "../../../constants";
+import { type IStyledInput, type IWrapper } from "@interfaces-types/task";
+import { COMPLETED_TASK_COLOR } from "@constants.ts";
 
 const slideIn = keyframes`
   from {

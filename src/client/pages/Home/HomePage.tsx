@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { getTasks, tasksFailure } from "../../redux/reducers/tasksSlice";
-import MenuScreen from "../../components/MenuScreen/MenuScreen";
-import { type ITask } from "../../interfaces-types/tasks";
-import TasksScreen from "../../components/TasksScreen/TasksScreen";
+import { useAppDispatch, useAppSelector } from "@redux/hooks";
+import { getTasks, tasksFailure } from "@redux/reducers/tasksSlice";
+import MenuScreen from "@components/MenuScreen/MenuScreen";
+import { type ITask } from "@interfaces-types/tasks";
+import TasksScreen from "@components/TasksScreen/TasksScreen";
 import {
   ErrorAlert,
   ErrorAlertButton,
@@ -12,9 +12,9 @@ import {
   StyledHomeWrapper,
 } from "./HomePage.style";
 import { RxCross2 } from "react-icons/rx";
-import useDeviceParams from "../../hooks/useDeviceParams";
-import { type IOpenMenu } from "../../interfaces-types/menu";
-import NavPhone from "../../components/NavPhone/NavPhone";
+import useDeviceParams from "@hooks/useDeviceParams";
+import { type IOpenMenu } from "@interfaces-types/menu";
+import NavPhone from "@components/NavPhone/NavPhone";
 
 const HomePage: React.FC = () => {
   const [filteredTasks, setFilteredTasks] = useState<ITask[]>([]);

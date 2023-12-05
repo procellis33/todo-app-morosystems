@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Task from "./Task/Task";
-import { type ITask } from "../../interfaces-types/tasks";
+import { type ITask } from "@interfaces-types/tasks";
 import {
   StyledEmptySign,
   StyledHeader,
@@ -10,8 +10,8 @@ import {
   StyledWrapper,
 } from "./TasksScreen.style";
 import { IoCreateOutline } from "react-icons/io5";
-import { useAppDispatch } from "../../redux/hooks";
-import { createTask, toggleTaskStatus } from "../../redux/reducers/tasksSlice";
+import { useAppDispatch } from "@redux/hooks";
+import { createTask, toggleTaskStatus } from "@redux/reducers/tasksSlice";
 import { IoIosArrowDropdown } from "react-icons/io";
 
 interface IAsksScreenProps {

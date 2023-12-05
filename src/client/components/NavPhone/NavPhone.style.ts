@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { type IStyledMenuButton } from "../../interfaces-types/menu";
+import { type IStyledMenuButton } from "@interfaces-types/menu";
 
 export const StyledMenuButton = styled.div.withConfig({
   shouldForwardProp: (prop) => !["isPressed"].includes(prop),

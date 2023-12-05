@@ -4,12 +4,12 @@ import { BsFillCollectionFill } from "react-icons/bs";
 import { AiOutlineCheck } from "react-icons/ai";
 import { LuListTodo } from "react-icons/lu";
 import { StyledMenuScreen } from "./MenuScreen.style";
-import { type IOpenMenu } from "../../interfaces-types/menu";
+import { type IOpenMenu } from "@interfaces-types/menu";
 import {
   ACTIVE_FOLDER_COLOR,
   ALL_FOLDER_COLOR,
   COMPLETED_FOLDER_COLOR,
-} from "../../constants";
+} from "@constants.ts";
 
 interface IMenuScreenProps {
   completedTasks: number;

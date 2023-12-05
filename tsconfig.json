@@ -1,5 +1,16 @@
 {
   "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@api/*": ["./client/api/*"],
+      "@assets/*": ["./client/assets/*"],
+      "@components/*": ["./client/components/*"],
+      "@hooks/*": ["./client/hooks/*"],
+      "@interfaces-types/*": ["./client/interfaces-types/*"],
+      "@pages/*": ["./client/pages/*"],
+      "@redux/*": ["./client/redux/*"],
+      "@constants.ts": ["./client/constants.ts"]
+    },
     // General Compilation Options
     "useDefineForClassFields": true, // Use ECMAScript 3-compatible method for class fields
 

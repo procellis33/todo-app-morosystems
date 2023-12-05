@@ -6,13 +6,13 @@ import {
   StyledInput,
   StyledWrapper,
 } from "./Task.style";
-import { type ITask } from "../../../interfaces-types/tasks";
-import { useAppDispatch } from "../../../redux/hooks";
+import { type ITask } from "@interfaces-types/tasks";
+import { useAppDispatch } from "@redux/hooks";
 import {
   deleteTask,
   modifyTask,
   toggleTaskStatus,
-} from "../../../redux/reducers/tasksSlice";
+} from "@redux/reducers/tasksSlice";
 import { MdDeleteOutline } from "react-icons/md";
 
 interface ITaskProps {
@@ -22,7 +22,7 @@ interface ITaskProps {
 const Task: React.FC<ITaskProps> = ({ task }) => {
   const [checked, setChecked] = useState(task.completed);
   const [showDelete, setShowDelete] = useState(false);
-  const [taskIsFocused, setTaskIsFocused] = useState(false)
+  const [taskIsFocused, setTaskIsFocused] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const dispatch = useAppDispatch();
   const wrapperRef: React.LegacyRef<HTMLDivElement> | null = useRef(null);
@@ -73,11 +73,11 @@ const Task: React.FC<ITaskProps> = ({ task }) => {
         defaultValue={task.text}
         onFocus={() => {
           setShowDelete(true);
-          setTaskIsFocused(true)
+          setTaskIsFocused(true);
         }}
         ref={textInputRef}
         onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
-          setTaskIsFocused(false)
+          setTaskIsFocused(false);
           // * Deleting task if input was left empty or modify if value has changed
           if (e.target.value === "") setIsDeleting(true);
           else if (e.target.value !== task.text)

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { type IAllCompleted } from "../../interfaces-types/task";
+import { type IAllCompleted } from "@interfaces-types/task";
 
 export const StyledEmptySign = styled.h1`
   display: flex;

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import {
   type IIconWrapperProps,
   type IStyledFolderButtonProps,
-} from "../../../interfaces-types/folder";
+} from "@interfaces-types/folder";
 
 export const FolderTop = styled.div`
   display: flex;

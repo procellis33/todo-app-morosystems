@@ -1,5 +1,5 @@
 import React from "react";
-import { type IOpenMenu } from "../../interfaces-types/menu";
+import { type IOpenMenu } from "@interfaces-types/menu";
 import { StyledMenuButton, StyledMenuButtonLine } from "./NavPhone.style";
 
 interface INavPhone {

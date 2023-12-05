@@ -1,4 +1,4 @@
-import { BASE_API_LINK } from "../constants";
+import { BASE_API_LINK } from "@constants.ts";
 
 const postApi = async (api: string, body?: object): Promise<Response> => {
   const requestOptions: RequestInit = {

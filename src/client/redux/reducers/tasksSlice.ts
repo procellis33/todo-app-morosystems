@@ -6,7 +6,7 @@ import {
   type TDeleteTask,
   type IModifyTask,
   type IToggleTaskStatus,
-} from "../../interfaces-types/tasks";
+} from "@interfaces-types/tasks";
 
 interface IInitialState {
   tasks: ITask[];

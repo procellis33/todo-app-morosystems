@@ -7,7 +7,7 @@ import {
   Label,
   StyledFolderButton,
 } from "./FolderButton.style";
-import { type IOpenMenu } from "../../../interfaces-types/menu";
+import { type IOpenMenu } from "@interfaces-types/menu";
 
 interface IFolder {
   tasksCount: number;

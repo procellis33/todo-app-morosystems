@@ -1,4 +1,4 @@
-import { BASE_API_LINK } from "../constants";
+import { BASE_API_LINK } from "@constants.ts";
 
 const getApi = async (api: string): Promise<Response> => {
   return await fetch(`${BASE_API_LINK}${api}`, {
